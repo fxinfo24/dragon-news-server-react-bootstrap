@@ -40,7 +40,7 @@ app.get( '/news/:id', (req, res) => {
 })
 
 // Get specific "category's" news with specific 'category id' using 'filter' method; cause more than one news may exist in a single category.
-app.get('/categories:id', (req, res) => {
+app.get('/categories/:id', (req, res) => {
     const id = parseInt(req.params.id);
     console.log(id); // id number as number not as string
     
@@ -49,7 +49,7 @@ app.get('/categories:id', (req, res) => {
         res.send(news) // no category, all news
     }
     else{
-        const specificCategory = category.filter(idNumber => parseInt(idNumber.category_id) === id);
+        const specificCategory = news.filter(idNumber => parseInt(idNumber.category_id) === id);
         res.send(specificCategory);
     }
 
