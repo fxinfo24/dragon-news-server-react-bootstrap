@@ -43,7 +43,14 @@ app.get( '/news/:id', (req, res) => {
 app.get('/categories:id', (req, res) => {
     const id = parseInt(req.params.id);
     console.log(id); // id number as number not as string
+    
+    // As there is no category id '0' in news.json, but in categories.json, we need to validate the category
+    if(id === 0) {
+        res.send(news) // no category, all news
+    }
+    else{
+        const specificCategory = category.filter(idNumber => parseInt(idNumber.category_id) === id);
+        res.send(specificCategory);
+    }
 
-    const specificCategory = category.filter(idNumber => parseInt(idNumber.category_id) === id);
-    res.send(specificCategory);
 })
